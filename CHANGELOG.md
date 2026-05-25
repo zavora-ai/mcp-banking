@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1] - 2026-05-25
+
+### Added
+- Architecture SVG diagram
+- API reference documentation (docs/api-reference.md)
+- Backend setup guides with sandbox testing instructions (docs/backends.md)
+- Fixed Mono balance endpoint to use dedicated `/balance` path
+
 ## [1.0.0] - 2026-05-25
 
 ### Added

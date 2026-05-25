@@ -36,8 +36,9 @@ impl BankingBackend for MonoBackend {
     }
 
     async fn get_balances(&self) -> Result<Vec<Balance>> {
-        let acc = self.get_account(&self.account_id).await?;
-        Ok(vec![Balance { account_id: acc.id, account_name: Some(acc.name), available: acc.balance_available, current: acc.balance_current.unwrap_or(0.0), currency: acc.currency, backend: "mono".into() }])
+        let resp = self.get(&format!("accounts/{}/balance", self.account_id)).await?;
+        let d = &resp["data"];
+        Ok(vec![Balance { account_id: self.account_id.clone(), account_name: None, available: d["available_balance"].as_f64().map(|b| b / 100.0), current: d["balance"].as_f64().map(|b| b / 100.0).unwrap_or(0.0), currency: d["currency"].as_str().map(Into::into), backend: "mono".into() }])
     }
 
     async fn list_transactions(&self, _account_id: &str, from: &str, to: &str, limit: u32) -> Result<Vec<Transaction>> {

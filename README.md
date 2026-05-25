@@ -130,6 +130,16 @@ export OB_TOKEN="your-oauth-token"
 → get_statement(account_id: "acc-1", from: "2026-01-01", to: "2026-03-31")
 ```
 
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [API Reference](docs/api-reference.md) | All 15 tools with parameters and types |
+| [Backends](docs/backends.md) | Setup guides for Plaid, Mono, Open Banking |
+| [Architecture](docs/assets/architecture.svg) | System diagram |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
+| [mcp-server.toml](mcp-server.toml) | ADK-Rust Enterprise registry manifest |
+
 ## Registry Compliance
 
 - **HealthCheck** — verifies backend connectivity
