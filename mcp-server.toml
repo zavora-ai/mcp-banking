@@ -1,0 +1,130 @@
+server_id = "mcp_banking"
+display_name = "Banking"
+version = "1.0.0"
+domain = "finance"
+sdk_version = "0.1.0"
+risk_level = "high"
+writes_allowed = "gated"
+transports = ["stdio"]
+credentials = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+governance_gates = ["financial-action-policy"]
+environments = ["development", "staging", "production"]
+
+# ─── Accounts ─────────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "list_accounts"
+description = "List linked bank accounts"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "get_account"
+description = "Get a bank account by ID with balance"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "get_balances"
+description = "Get real-time balances for all linked accounts"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Transactions ─────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "list_transactions"
+description = "List transactions for an account with date range"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "get_transaction"
+description = "Get a single transaction by ID"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "search_transactions"
+description = "Search transactions by description, amount, or category"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "categorize_transaction"
+description = "Get or update the category of a transaction"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Identity ─────────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "get_identity"
+description = "Get account holder identity (name, address, email)"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Institutions ─────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "list_institutions"
+description = "List supported financial institutions"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "get_institution"
+description = "Get details about a financial institution"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Payments ─────────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "initiate_payment"
+description = "Initiate a bank transfer/payment (draft, requires approval)"
+risk_class = "financial_action"
+requires_approval = true
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "get_payment_status"
+description = "Get the status of a payment/transfer"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+[[tools]]
+name = "list_payments"
+description = "List payment/transfer history"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Statements ───────────────────────────────────────────────────────────────
+
+[[tools]]
+name = "get_statement"
+description = "Get a bank statement for a period"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
+
+# ─── Webhooks / Sync ──────────────────────────────────────────────────────────
+
+[[tools]]
+name = "sync_transactions"
+description = "Trigger a transaction sync/refresh from the bank"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
