@@ -1,6 +1,6 @@
 [package]
 name = "mcp-banking"
-version = "1.0.2"
+version = "1.1.0"
 edition = "2024"
 rust-version = "1.94.1"
 authors = ["James Karanja <james.karanja@zavora.ai>"]
