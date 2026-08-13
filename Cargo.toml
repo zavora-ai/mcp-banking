@@ -1,7 +1,8 @@
 [package]
 name = "mcp-banking"
-version = "1.0.2"
+version = "1.1.0"
 edition = "2024"
+rust-version = "1.94.1"
 authors = ["James Karanja <james.karanja@zavora.ai>"]
 description = "Enterprise Banking MCP Server — unified access to Plaid, Mono (Africa), and Open Banking UK/EU for accounts, transactions, balances, and payments"
 license = "Apache-2.0"
@@ -19,7 +20,7 @@ open-banking = []
 all-backends = ["plaid", "mono", "open-banking"]
 
 [dependencies]
-adk-mcp-sdk = "0.1"
+adk-mcp-sdk = { version = "0.2.0", git = "https://github.com/zavora-ai/adk-mcp-sdk.git", rev = "4dac4301441a8a51a042fd66cc1798f0ec3e3f55" }
 rmcp = { version = "3.1.2", features = ["server", "transport-io", "macros"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

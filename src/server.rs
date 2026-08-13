@@ -27,7 +27,7 @@ fn d_usd() -> String { "USD".into() }
 #[derive(Clone)]
 pub struct BankingServer { pub backend: Arc<dyn BankingBackend> }
 
-#[tool_router(server_handler)]
+#[tool_router]
 impl BankingServer {
     #[tool(description = "List linked bank accounts")]
     async fn list_accounts(&self) -> String {
@@ -99,4 +99,11 @@ impl HealthCheck for BankingServer {
             Err(e) => HealthStatus { healthy: false, message: Some(format!("{}: {e}", self.backend.name())), latency_ms: None },
         }
     }
+}
+
+adk_mcp_sdk::mcp_2026_server! {
+    server: BankingServer,
+    task_tools: ["sync_transactions"],
+    approval_tools: ["initiate_payment"],
+    cache_ttl_ms: 60_000,
 }
