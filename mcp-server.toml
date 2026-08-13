@@ -2,15 +2,13 @@ server_id = "mcp_banking"
 display_name = "Banking"
 version = "1.0.2"
 domain = "finance"
-sdk_version = "0.1.0"
-risk_level = "high"
+sdk_version = "0.2.0"
+risk_level = "critical"
 writes_allowed = "gated"
 transports = ["stdio"]
 credentials = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
-governance_gates = ["financial-action-policy"]
+governance_gates = ["financial-action-policy", "mrtr_approval"]
 environments = ["development", "staging", "production"]
-
-# ─── Accounts ─────────────────────────────────────────────────────────────────
 
 [[tools]]
 name = "list_accounts"
@@ -32,8 +30,6 @@ description = "Get real-time balances for all linked accounts"
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
-
-# ─── Transactions ─────────────────────────────────────────────────────────────
 
 [[tools]]
 name = "list_transactions"
@@ -63,16 +59,12 @@ risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
 
-# ─── Identity ─────────────────────────────────────────────────────────────────
-
 [[tools]]
 name = "get_identity"
 description = "Get account holder identity (name, address, email)"
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
-
-# ─── Institutions ─────────────────────────────────────────────────────────────
 
 [[tools]]
 name = "list_institutions"
@@ -87,8 +79,6 @@ description = "Get details about a financial institution"
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
-
-# ─── Payments ─────────────────────────────────────────────────────────────────
 
 [[tools]]
 name = "initiate_payment"
@@ -111,16 +101,12 @@ risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
 
-# ─── Statements ───────────────────────────────────────────────────────────────
-
 [[tools]]
 name = "get_statement"
 description = "Get a bank statement for a period"
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = ["vault://plaid-credentials", "vault://mono-secret-key", "vault://open-banking-credentials"]
-
-# ─── Webhooks / Sync ──────────────────────────────────────────────────────────
 
 [[tools]]
 name = "sync_transactions"
